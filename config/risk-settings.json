@@ -1,0 +1,11 @@
+{
+  "tradingMode": "paper",
+  "watchlist": ["AAPL", "MSFT", "NVDA", "SPY"],
+  "autoExecuteEnabled": true,
+  "maxOrderNotionalUSD": 5000,
+  "maxTotalInvestedUSD": 10000,
+  "maxPositionPercentOfPortfolio": 0.20,
+  "minConfidenceToExecute": 0.55,
+  "maxTradesPerDay": 5,
+  "allowedSymbols": []
+}
