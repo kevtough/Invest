@@ -1,0 +1,1 @@
+{"timestamp": "2026-08-17T21:24:44.732875+00:00", "tradingMode": "paper", "summary": "AAPL and MSFT quotes show ask=0, indicating stale or bad data that shouldn't be traded on; NVDA and SPY have valid quotes but no fundamental or technical catalyst is provided to justify a position, so no trades are proposed this cycle.", "proposals": []}
