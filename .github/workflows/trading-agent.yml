@@ -1,0 +1,33 @@
+name: AI Trading Agent
+
+on:
+  schedule:
+    # Every 30 minutes, roughly covering US market hours (9:30am-4pm ET).
+    # Window is UTC 13:00-20:59, slightly wider than exact market hours
+    # since GitHub Actions cron doesn't adjust for daylight saving.
+    - cron: "*/30 13-20 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run trading agent
+        env:
+          ALPACA_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 scripts/run_trading_agent.py
+
+      - name: Commit run log
+        run: |
+          git config user.name "ai-trading-agent"
+          git config user.email "actions@github.com"
+          git add logs/agent-runs.jsonl
+          git diff --cached --quiet || git commit -m "Log agent run $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
